@@ -1,0 +1,4 @@
+.root { -fx-font-family: 'Segoe UI', 'Open Sans', sans-serif; }
+.root.light { -fx-base: #f7f9fc; -fx-background-color: #ffffff; -fx-text-fill: #222; }
+.root.dark { -fx-base: #1f2430; -fx-background-color: #161a23; -fx-text-fill: #eaeaea; }
+.dark .label { -fx-text-fill: #eaeaea; } .dark .table-view { -fx-background-color: #202736; -fx-text-fill: #eaeaea; }

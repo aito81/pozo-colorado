@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.pozocolorado.app.controllers.LoginController">
+  <center>
+    <VBox alignment="CENTER" spacing="12.0" stylesheets="@../bootstrapfx-core.css">
+      <children>
+        <Label text="Hotel Pozo Colorado" styleClass="h3"/>
+        <GridPane hgap="8" vgap="8">
+          <columnConstraints>
+            <ColumnConstraints halignment="RIGHT" minWidth="80"/>
+            <ColumnConstraints minWidth="200"/>
+          </columnConstraints>
+          <rowConstraints>
+            <RowConstraints minHeight="30"/>
+            <RowConstraints minHeight="30"/>
+          </rowConstraints>
+          <children>
+            <Label text="Usuario:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+            <TextField fx:id="usernameField" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+            <Label text="Contraseña:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+            <PasswordField fx:id="passwordField" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+          </children>
+        </GridPane>
+        <HBox spacing="10">
+          <children>
+            <Button text="Ingresar" onAction="#onLogin" styleClass="btn, btn-primary"/>
+          </children>
+        </HBox>
+        <CheckBox fx:id="darkModeToggle" text="Modo oscuro"/>
+      </children>
+      <padding><Insets top="24" right="24" bottom="24" left="24"/></padding>
+    </VBox>
+  </center>
+</BorderPane>

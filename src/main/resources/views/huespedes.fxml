@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.*?>
+<BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.pozocolorado.app.controllers.HuespedController">
+  <top>
+    <ToolBar>
+      <items>
+        <Label text="Huéspedes" styleClass="h4"/>
+        <Pane HBox.hgrow="ALWAYS"/>
+        <TextField fx:id="searchField" promptText="Buscar por nombre, documento o país..." />
+        <Button text="Reservas" onAction="#goReservas"/>
+        <Button text="Salir" onAction="#logout"/>
+      </items>
+    </ToolBar>
+  </top>
+  <center>
+    <TableView fx:id="table">
+      <columns>
+        <TableColumn text="Nombre" fx:id="colNombre" prefWidth="160"/>
+        <TableColumn text="Tipo Doc" fx:id="colTipoDoc" prefWidth="90"/>
+        <TableColumn text="N° Doc" fx:id="colNumeroDoc" prefWidth="120"/>
+        <TableColumn text="Nacimiento" fx:id="colNacimiento" prefWidth="110"/>
+        <TableColumn text="Teléfono" fx:id="colTelefono" prefWidth="120"/>
+        <TableColumn text="País" fx:id="colPais" prefWidth="100"/>
+      </columns>
+    </TableView>
+  </center>
+  <bottom>
+    <GridPane hgap="8" vgap="8">
+      <padding><Insets top="8" right="8" bottom="8" left="8"/></padding>
+      <columnConstraints>
+        <ColumnConstraints minWidth="100"/>
+        <ColumnConstraints minWidth="200"/>
+        <ColumnConstraints minWidth="100"/>
+        <ColumnConstraints minWidth="200"/>
+      </columnConstraints>
+      <children>
+        <Label text="Nombre:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+        <TextField fx:id="nombreField" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+        <Label text="Tipo Doc:" GridPane.rowIndex="0" GridPane.columnIndex="2"/>
+        <ComboBox fx:id="tipoDocBox" GridPane.rowIndex="0" GridPane.columnIndex="3"/>
+
+        <Label text="N° Documento:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+        <TextField fx:id="numeroDocField" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+        <Label text="Nacimiento:" GridPane.rowIndex="1" GridPane.columnIndex="2"/>
+        <DatePicker fx:id="nacimientoPicker" GridPane.rowIndex="1" GridPane.columnIndex="3"/>
+
+        <Label text="Teléfono:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+        <TextField fx:id="telefonoField" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+        <Label text="País:" GridPane.rowIndex="2" GridPane.columnIndex="2"/>
+        <TextField fx:id="paisField" GridPane.rowIndex="2" GridPane.columnIndex="3"/>
+
+        <HBox spacing="8" GridPane.rowIndex="3" GridPane.columnIndex="0" GridPane.columnSpan="4">
+          <children>
+            <Button text="Nuevo" onAction="#nuevo" />
+            <Button text="Guardar" onAction="#guardar" styleClass="btn, btn-success"/>
+            <Button text="Eliminar" onAction="#eliminar" styleClass="btn, btn-danger"/>
+          </children>
+        </HBox>
+      </children>
+    </GridPane>
+  </bottom>
+</BorderPane>

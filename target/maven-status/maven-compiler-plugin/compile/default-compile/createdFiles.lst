@@ -1,0 +1,7 @@
+com\pozocolorado\app\utils\AlertUtils.class
+com\pozocolorado\app\controllers\LoginController.class
+com\pozocolorado\app\controllers\PersonaRow.class
+com\pozocolorado\app\db\Database.class
+com\pozocolorado\app\MainApp.class
+com\pozocolorado\app\controllers\ReservaRow.class
+com\pozocolorado\app\controllers\HuespedController.class
