@@ -2,6 +2,7 @@ package com.pozocolorado.app.controllers;
 
 import com.pozocolorado.app.db.Database;
 import com.pozocolorado.app.utils.AlertUtils;
+import com.pozocolorado.app.utils.ThemeManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -39,6 +40,19 @@ public class HuespedController {
     private Integer selectedId = null;
 
     @FXML public void initialize() {
+        javafx.application.Platform.runLater(() -> {
+            Scene scene = table.getScene();
+            if (scene != null) {
+                ThemeManager.applyGradient(scene, false);
+
+                // 💥 Forzamos la ventana al 100%
+                Stage stage = (Stage) scene.getWindow();
+                if (stage != null) {
+                    stage.setMaximized(false);
+                    stage.setMaximized(true);
+                }
+            }
+        });
         colNombre.setCellValueFactory(c -> c.getValue().nombreProperty());
         colTipoDoc.setCellValueFactory(c -> c.getValue().tipoDocumentoProperty());
         colNumeroDoc.setCellValueFactory(c -> c.getValue().numeroDocumentoProperty());
@@ -75,6 +89,14 @@ public class HuespedController {
             }
         });
         refresh();
+
+        javafx.application.Platform.runLater(() -> {
+            Stage stage = (Stage) table.getScene().getWindow();
+            if (stage != null) {
+                stage.setMaximized(false);
+                stage.setMaximized(true);
+            }
+        });
     }
 
     private void refresh() {
@@ -145,8 +167,17 @@ public class HuespedController {
         Stage stage = (Stage) current.getWindow();
         root.getStylesheets().add(getClass().getResource("/bootstrapfx-core.css").toExternalForm());
         root.getStylesheets().add(getClass().getResource("/style.css").toExternalForm());
-        root.getStyleClass().add(current.getRoot().getStyleClass().contains("dark") ? "dark" : "light");
-        stage.setScene(new Scene(root, 1100, 680));
+        boolean dark = current.getRoot().getStyleClass().contains("dark");
+
+        Scene newScene = new Scene(root);
+        ThemeManager.applyGradient(newScene, dark);
+        stage.setScene(newScene);
+
+        // 👇 Este bloque fuerza el remaximizado de manera segura
+        javafx.application.Platform.runLater(() -> {
+            stage.setMaximized(false); // fuerza recalcular layout
+            stage.setMaximized(true);  // vuelve a pantalla completa
+        });
     }
 
     @FXML public void logout(ActionEvent e) throws IOException {
@@ -156,7 +187,26 @@ public class HuespedController {
         Stage stage = (Stage) current.getWindow();
         root.getStylesheets().add(getClass().getResource("/bootstrapfx-core.css").toExternalForm());
         root.getStylesheets().add(getClass().getResource("/style.css").toExternalForm());
-        root.getStyleClass().add(current.getRoot().getStyleClass().contains("dark") ? "dark" : "light");
-        stage.setScene(new Scene(root, 800, 480));
+        boolean dark = current.getRoot().getStyleClass().contains("dark");
+
+        Scene newScene = new Scene(root);
+        ThemeManager.applyGradient(newScene, dark);
+        stage.setScene(newScene);
+
+        // 👇 Igual que arriba
+        javafx.application.Platform.runLater(() -> {
+            stage.setMaximized(false);
+            stage.setMaximized(true);
+        });
     }
+    @FXML
+    public void exportarCSV(ActionEvent e) {
+        AlertUtils.info("Exportar CSV", "Esta función estará disponible próximamente.");
+    }
+
+    @FXML
+    public void exportarPDF(ActionEvent e) {
+        AlertUtils.info("Exportar PDF", "Esta función estará disponible próximamente.");
+    }
+
 }

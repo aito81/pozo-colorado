@@ -1,74 +1,129 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.pozocolorado.app.controllers.ReservaController">
-  <top>
-    <ToolBar>
-      <items>
-        <Label text="Reservas" styleClass="h4"/>
-        <Pane HBox.hgrow="ALWAYS"/>
-        <Button text="Huéspedes" onAction="#goHuespedes"/>
-        <Button text="Salir" onAction="#logout"/>
-      </items>
-    </ToolBar>
-  </top>
-  <center>
-    <VBox spacing="6">
-      <children>
-        <ToolBar>
-          <items>
-            <Label text="Huésped"/>
-            <ComboBox fx:id="filterHuespedBox" prefWidth="200"/>
-            <Label text="Desde"/>
-            <DatePicker fx:id="filterDesdePicker"/>
-            <Label text="Hasta"/>
-            <DatePicker fx:id="filterHastaPicker"/>
-            <TextField fx:id="searchField" promptText="Buscar por huésped, habitación o estado..." prefWidth="280"/>
-            <Pane HBox.hgrow="ALWAYS"/>
-            <Button text="Exportar CSV" onAction="#exportCsv"/>
-            <Button text="Exportar PDF" onAction="#exportPdf"/>
-          </items>
-        </ToolBar>
-        <TableView fx:id="table">
-          <columns>
-            <TableColumn text="Huésped" fx:id="colHuesped" prefWidth="180"/>
-            <TableColumn text="Habitación" fx:id="colHabitacion" prefWidth="120"/>
-            <TableColumn text="Desde" fx:id="colDesde" prefWidth="110"/>
-            <TableColumn text="Hasta" fx:id="colHasta" prefWidth="110"/>
-            <TableColumn text="Estado" fx:id="colEstado" prefWidth="100"/>
-          </columns>
-        </TableView>
-      </children>
-    </VBox>
-  </center>
-  <bottom>
-    <GridPane hgap="8" vgap="8">
-      <columnConstraints>
-        <ColumnConstraints minWidth="100"/>
-        <ColumnConstraints minWidth="200"/>
-        <ColumnConstraints minWidth="100"/>
-        <ColumnConstraints minWidth="200"/>
-      </columnConstraints>
-      <children>
-        <Label text="Huésped:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
-        <ComboBox fx:id="huespedBox" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
-        <Label text="Habitación:" GridPane.rowIndex="0" GridPane.columnIndex="2"/>
-        <TextField fx:id="habitacionField" GridPane.rowIndex="0" GridPane.columnIndex="3"/>
-        <Label text="Desde:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
-        <DatePicker fx:id="desdePicker" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
-        <Label text="Hasta:" GridPane.rowIndex="1" GridPane.columnIndex="2"/>
-        <DatePicker fx:id="hastaPicker" GridPane.rowIndex="1" GridPane.columnIndex="3"/>
-        <Label text="Estado:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
-        <ComboBox fx:id="estadoBox" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
-        <HBox spacing="8" GridPane.rowIndex="3" GridPane.columnIndex="0" GridPane.columnSpan="4">
-          <children>
-            <Button text="Nueva" onAction="#nueva"/>
-            <Button text="Guardar" onAction="#guardar" styleClass="btn, btn-success"/>
-            <Button text="Eliminar" onAction="#eliminar" styleClass="btn, btn-danger"/>
-          </children>
+
+<BorderPane xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.pozocolorado.app.controllers.ReservaController"
+            stylesheets="@../style.css">
+
+    <!-- 🌅 Barra superior moderna -->
+    <top>
+        <HBox spacing="15"
+              style="-fx-background-color: linear-gradient(to right, #fc4a1a, #f7b733);
+                     -fx-alignment: center;
+                     -fx-padding: 12;
+                     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 8, 0.3, 0, 2);">
+
+            <children>
+                <!-- 👤 Botón de navegación -->
+                <Button text="👤 Huéspedes" onAction="#goHuespedes" styleClass="nav-inactive"/>
+
+                <!-- 🏨 Botón activo (Reservas) -->
+                <Button text="🏨 Reservas" disable="true" styleClass="nav-active"/>
+
+                <Pane HBox.hgrow="ALWAYS"/>
+
+                <HBox spacing="10">
+                    <children>
+                        <Button text="📤 CSV" onAction="#exportCsv" styleClass="export"/>
+                        <Button text="📘 PDF" onAction="#exportPdf" styleClass="export"/>
+                    </children>
+                </HBox>
+
+                <Button text="🚪 Salir" onAction="#logout" styleClass="exit"/>
+            </children>
+
         </HBox>
-      </children>
-    </GridPane>
-  </bottom>
+    </top>
+
+    <!-- 📋 TABLA CENTRAL -->
+    <center>
+        <VBox spacing="10">
+            <padding>
+                <Insets top="10" right="10" bottom="10" left="10"/>
+            </padding>
+            <children>
+
+                <!-- 🎛️ FILTROS -->
+                <HBox spacing="10" alignment="CENTER_LEFT">
+                    <padding>
+                        <Insets top="8" right="8" bottom="8" left="8"/>
+                    </padding>
+                    <children>
+                        <Label text="Huésped:"/>
+                        <ComboBox fx:id="filterHuespedBox" prefWidth="150"/>
+
+                        <Label text="Desde:"/>
+                        <DatePicker fx:id="filterDesdePicker"/>
+
+                        <Label text="Hasta:"/>
+                        <DatePicker fx:id="filterHastaPicker"/>
+
+                        <TextField fx:id="searchField"
+                                   promptText="🔍 Buscar reserva..."
+                                   prefWidth="220"
+                                   style="-fx-background-radius: 8; -fx-border-radius: 8;"/>
+
+                        <Pane HBox.hgrow="ALWAYS"/>
+                    </children>
+                </HBox>
+
+                <!-- 🧾 TABLA DE RESERVAS -->
+                <TableView fx:id="table">
+                    <columns>
+                        <TableColumn text="Huésped" fx:id="colHuesped" prefWidth="180"/>
+                        <TableColumn text="Habitación" fx:id="colHabitacion" prefWidth="120"/>
+                        <TableColumn text="Desde" fx:id="colDesde" prefWidth="110"/>
+                        <TableColumn text="Hasta" fx:id="colHasta" prefWidth="110"/>
+                        <TableColumn text="Estado" fx:id="colEstado" prefWidth="100"/>
+                    </columns>
+                </TableView>
+            </children>
+        </VBox>
+    </center>
+
+    <!-- 🔘 FORMULARIO INFERIOR -->
+    <bottom>
+        <VBox spacing="12"
+              style="-fx-background-color: linear-gradient(to right, #f7b733, #fc4a1a);
+                     -fx-padding: 12;">
+            <children>
+                <GridPane hgap="10" vgap="10">
+                    <columnConstraints>
+                        <ColumnConstraints minWidth="100"/>
+                        <ColumnConstraints minWidth="200"/>
+                        <ColumnConstraints minWidth="100"/>
+                        <ColumnConstraints minWidth="200"/>
+                    </columnConstraints>
+                    <children>
+                        <Label text="Huésped:" GridPane.rowIndex="0" GridPane.columnIndex="0" style="-fx-text-fill: white;"/>
+                        <ComboBox fx:id="huespedBox" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+                        <Label text="Habitación:" GridPane.rowIndex="0" GridPane.columnIndex="2" style="-fx-text-fill: white;"/>
+                        <TextField fx:id="habitacionField" GridPane.rowIndex="0" GridPane.columnIndex="3"/>
+
+                        <Label text="Desde:" GridPane.rowIndex="1" GridPane.columnIndex="0" style="-fx-text-fill: white;"/>
+                        <DatePicker fx:id="desdePicker" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+                        <Label text="Hasta:" GridPane.rowIndex="1" GridPane.columnIndex="2" style="-fx-text-fill: white;"/>
+                        <DatePicker fx:id="hastaPicker" GridPane.rowIndex="1" GridPane.columnIndex="3"/>
+
+                        <Label text="Estado:" GridPane.rowIndex="2" GridPane.columnIndex="0" style="-fx-text-fill: white;"/>
+                        <ComboBox fx:id="estadoBox" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+                    </children>
+                </GridPane>
+
+                <!-- 🧭 Botonera inferior -->
+                <HBox spacing="10" alignment="CENTER">
+                    <children>
+                        <Button text="🆕 Nueva" onAction="#nueva" styleClass="btn-new"/>
+                        <Button text="💾 Guardar" onAction="#guardar" styleClass="btn-save"/>
+                        <Button text="🗑️ Eliminar" onAction="#eliminar" styleClass="btn-delete"/>
+                    </children>
+                </HBox>
+            </children>
+        </VBox>
+    </bottom>
 </BorderPane>

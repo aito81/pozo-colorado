@@ -1,37 +1,83 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
-<BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.pozocolorado.app.controllers.LoginController">
-  <center>
-    <VBox alignment="CENTER" spacing="12.0" stylesheets="@../bootstrapfx-core.css">
-      <children>
-        <Label text="Hotel Pozo Colorado" styleClass="h3"/>
-        <GridPane hgap="8" vgap="8">
-          <columnConstraints>
-            <ColumnConstraints halignment="RIGHT" minWidth="80"/>
-            <ColumnConstraints minWidth="200"/>
-          </columnConstraints>
-          <rowConstraints>
-            <RowConstraints minHeight="30"/>
-            <RowConstraints minHeight="30"/>
-          </rowConstraints>
-          <children>
-            <Label text="Usuario:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
-            <TextField fx:id="usernameField" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
-            <Label text="Contraseña:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
-            <PasswordField fx:id="passwordField" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
-          </children>
-        </GridPane>
-        <HBox spacing="10">
-          <children>
-            <Button text="Ingresar" onAction="#onLogin" styleClass="btn, btn-primary"/>
-          </children>
-        </HBox>
-        <CheckBox fx:id="darkModeToggle" text="Modo oscuro"/>
-      </children>
-      <padding><Insets top="24" right="24" bottom="24" left="24"/></padding>
-    </VBox>
-  </center>
-</BorderPane>
+
+<AnchorPane xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.pozocolorado.app.controllers.LoginController"
+            stylesheets="@/style.css">
+
+    <!-- Fondo degradado cálido -->
+    <AnchorPane fx:id="rootPane"
+                style="-fx-background-color: linear-gradient(to bottom right, #f7b733, #fc4a1a);"
+                AnchorPane.topAnchor="0.0"
+                AnchorPane.bottomAnchor="0.0"
+                AnchorPane.leftAnchor="0.0"
+                AnchorPane.rightAnchor="0.0">
+
+    <children>
+
+            <!-- Contenedor centrado -->
+            <StackPane prefWidth="800" prefHeight="600" AnchorPane.topAnchor="0.0"
+                       AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                <children>
+                    <!-- Panel central -->
+                    <VBox alignment="CENTER" spacing="18.0"
+                          maxWidth="360" maxHeight="380"
+                          style="-fx-background-color: rgba(255,255,255,0.92);
+                     -fx-background-radius: 20;
+                     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 15, 0.3, 0, 4);">
+                        <padding>
+                            <Insets top="30" right="30" bottom="30" left="30"/>
+                        </padding>
+
+                        <children>
+                            <VBox alignment="CENTER" spacing="6">
+                                <children>
+                                    <ImageView fx:id="logoView"
+                                               fitHeight="110" fitWidth="110"
+                                               pickOnBounds="true" preserveRatio="true"
+                                               style="-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 8, 0.3, 0, 2);"/>
+                                    <Label text="Hotel Pozo Colorado"
+                                           style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #333;"/>
+                                    <Label text="Bienvenido"
+                                           style="-fx-font-size: 13px; -fx-text-fill: #666;"/>
+                                </children>
+                            </VBox>
+
+                            <Separator prefWidth="200"/>
+
+                            <GridPane hgap="10" vgap="15">
+                                <children>
+                                    <Label text="Usuario:" GridPane.rowIndex="0" GridPane.columnIndex="0"
+                                           style="-fx-text-fill: #444; -fx-font-weight: bold;"/>
+                                    <TextField fx:id="usernameField" GridPane.rowIndex="0" GridPane.columnIndex="1"
+                                               promptText="admin"
+                                               style="-fx-background-radius: 8; -fx-border-radius: 8;"/>
+
+                                    <Label text="Contraseña:" GridPane.rowIndex="1" GridPane.columnIndex="0"
+                                           style="-fx-text-fill: #444; -fx-font-weight: bold;"/>
+                                    <PasswordField fx:id="passwordField" GridPane.rowIndex="1" GridPane.columnIndex="1"
+                                                   promptText="admin"
+                                                   style="-fx-background-radius: 8; -fx-border-radius: 8;"/>
+                                </children>
+                            </GridPane>
+
+                            <Button fx:id="loginButton"
+                                    text="Iniciar Sesión"
+                                    onAction="#onLogin"
+                                    prefWidth="180"
+                                    styleClass="login-button"/>
+
+                            <CheckBox fx:id="darkModeToggle" text="Modo oscuro"
+                                      style="-fx-text-fill: #444; -fx-font-size: 12px;"/>
+                        </children>
+                    </VBox>
+                </children>
+            </StackPane>
+
+        </children>
+    </AnchorPane>
+</AnchorPane>

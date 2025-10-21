@@ -1,5 +1,6 @@
 package com.pozocolorado.app;
 
+import com.pozocolorado.app.utils.ThemeManager;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -24,6 +25,7 @@ public class MainApp extends Application {
         try { stage.getIcons().add(new Image(getClass().getResourceAsStream("/icons/sol.png"))); } catch (Exception ignore) {}
         stage.setScene(scene);
         stage.show();
+        ThemeManager.maximize(stage);
     }
     public static void main(String[] args) { launch(args); }
 }

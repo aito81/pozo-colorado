@@ -1,4 +1,103 @@
-.root { -fx-font-family: 'Segoe UI', 'Open Sans', sans-serif; }
-.root.light { -fx-base: #f7f9fc; -fx-background-color: #ffffff; -fx-text-fill: #222; }
-.root.dark { -fx-base: #1f2430; -fx-background-color: #161a23; -fx-text-fill: #eaeaea; }
-.dark .label { -fx-text-fill: #eaeaea; } .dark .table-view { -fx-background-color: #202736; -fx-text-fill: #eaeaea; }
+/* === BOTONES DE LA BARRA SUPERIOR === */
+.nav-inactive {
+    -fx-background-color: #ffffff;
+    -fx-text-fill: #fc4a1a;
+    -fx-font-weight: bold;
+    -fx-background-radius: 25;
+    -fx-border-radius: 25;
+    -fx-border-color: transparent;
+    -fx-cursor: hand;
+    -fx-padding: 6 16 6 16;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 3, 0.2, 0, 1);
+}
+.nav-inactive:hover {
+    -fx-background-color: #fff5ef;
+    -fx-border-color: #fc4a1a;
+}
+.nav-inactive:pressed {
+    -fx-background-color: #ffd4b8;
+}
+
+/* === EXPORT (CSV / PDF) === */
+.export {
+    -fx-background-color: linear-gradient(to bottom, #fc4a1a, #f7b733);
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 12;
+}
+.export:hover {
+    -fx-background-color: linear-gradient(to bottom, #ff9447, #ffb733);
+}
+
+/* === BOTÓN DE SALIR === */
+.exit {
+    -fx-background-color: linear-gradient(to bottom, #d32f2f, #b71c1c);
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 10;
+}
+.exit:hover {
+    -fx-background-color: #e53935;
+}
+
+/* === BOTÓN DE LOGIN === */
+.login-button {
+    -fx-background-color: linear-gradient(to right, #fc4a1a, #f88f2c);
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 10;
+    -fx-padding: 8 18 8 18;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 6, 0.3, 0, 2);
+    -fx-cursor: hand;
+}
+.login-button:hover {
+    -fx-background-color: #f76f1a;
+}
+/* Botón ACTIVO (ventana actual) */
+.nav-active {
+    -fx-background-color: linear-gradient(to right, #fc4a1a, #f7b733);
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 25;
+}
+
+/* === COMPAT: base común para botones de acción (abajo) === */
+.button-action, .btn-new, .btn-save, .btn-delete {
+    -fx-font-weight: bold;
+    -fx-background-radius: 14;
+    -fx-border-radius: 14;
+    -fx-cursor: hand;
+    -fx-padding: 7 20 7 20;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 4, 0.3, 0, 2);
+    -fx-font-size: 12.5px;
+    -fx-border-width: 0;
+}
+
+/* 🆕 NUEVO / NUEVA */
+.button-action.btn-new, .btn-new {
+    -fx-background-color: linear-gradient(to right, #ffe29f, #ffa751, #ff7f50);
+    -fx-text-fill: white;
+}
+.button-action.btn-new:hover, .btn-new:hover {
+    -fx-background-color: linear-gradient(to right, #fff5c2, #ffc471, #ff8e6b);
+}
+
+/* 💾 GUARDAR */
+.button-action.btn-save, .btn-save {
+    -fx-background-color: linear-gradient(to right, #43e97b, #38f9d7);
+    -fx-text-fill: white;
+}
+.button-action.btn-save:hover, .btn-save:hover {
+    -fx-background-color: linear-gradient(to right, #6afc96, #54ffe1);
+}
+
+/* 🗑️ ELIMINAR */
+.button-action.btn-delete, .btn-delete {
+    -fx-background-color: linear-gradient(to right, #ff512f, #dd2476);
+    -fx-text-fill: white;
+}
+.button-action.btn-delete:hover, .btn-delete:hover {
+    -fx-background-color: linear-gradient(to right, #ff6a3d, #e83b8b);
+}
+
+
